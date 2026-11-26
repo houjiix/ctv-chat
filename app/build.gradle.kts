@@ -16,7 +16,10 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner =
+            "androidx.test.runner.AndroidJUnitRunner"
+
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -28,8 +31,11 @@ android {
 
         release {
             isMinifyEnabled = true
+
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
+                getDefaultProguardFile(
+                    "proguard-android-optimize.txt"
+                ),
                 "proguard-rules.pro"
             )
         }
@@ -46,11 +52,12 @@ android {
     }
 
     packaging {
-        resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        resources.excludes +=
+            "/META-INF/{AL2.0,LGPL2.1}"
     }
 }
 
-// Kotlin compiler configuration (Kotlin 2.x)
+// Kotlin 2.x compiler configuration
 kotlin {
     compilerOptions {
         jvmTarget.set(
@@ -63,22 +70,36 @@ kapt {
     correctErrorTypes = true
 
     arguments {
-        arg("room.schemaLocation", "$projectDir/schemas")
+        arg(
+            "room.schemaLocation",
+            "$projectDir/schemas"
+        )
     }
 }
 
 dependencies {
-    val composeBom = platform("androidx.compose:compose-bom:2026.09.00")
+
+    // FIX: Compose BOM compatible with AGP 8.13 / SDK 36
+    val composeBom =
+        platform("androidx.compose:compose-bom:2026.04.01")
 
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
+    // AndroidX
     implementation("androidx.core:core-ktx:1.17.0")
     implementation("androidx.activity:activity-compose:1.13.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.10.0")
 
+    implementation(
+        "androidx.lifecycle:lifecycle-runtime-ktx:2.10.0"
+    )
+
+    implementation(
+        "androidx.lifecycle:lifecycle-runtime-compose:2.10.0"
+    )
+
+    // Jetpack Compose
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.foundation:foundation")
@@ -86,26 +107,46 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
 
-    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation(
+        "androidx.compose.ui:ui-tooling"
+    )
 
+    // Media3 Player
     implementation("androidx.media3:media3-exoplayer:1.11.1")
     implementation("androidx.media3:media3-ui:1.11.1")
     implementation("androidx.media3:media3-session:1.11.1")
 
+    // Room Database
     implementation("androidx.room:room-runtime:2.8.5")
     implementation("androidx.room:room-ktx:2.8.5")
     kapt("androidx.room:room-compiler:2.8.5")
 
-    implementation("androidx.datastore:datastore-preferences:1.3.0")
+    // DataStore
+    implementation(
+        "androidx.datastore:datastore-preferences:1.3.0"
+    )
 
+    // Coil Image Loading
     implementation("io.coil-kt.coil3:coil-compose:3.3.0")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 
+    // Unit Tests
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation("androidx.test.ext:junit:1.3.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    // Instrumentation Tests
+    androidTestImplementation(
+        "androidx.test.ext:junit:1.3.0"
+    )
 
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation(
+        "androidx.test.espresso:espresso-core:3.7.0"
+    )
+
+    androidTestImplementation(
+        "androidx.compose.ui:ui-test-junit4"
+    )
+
+    debugImplementation(
+        "androidx.compose.ui:ui-test-manifest"
+    )
 }
