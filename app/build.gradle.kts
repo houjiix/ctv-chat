@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -24,6 +25,7 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
         }
+
         release {
             isMinifyEnabled = true
             proguardFiles(
@@ -38,10 +40,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     buildFeatures {
         compose = true
         buildConfig = true
@@ -52,8 +50,18 @@ android {
     }
 }
 
+// Kotlin compiler configuration (Kotlin 2.x)
+kotlin {
+    compilerOptions {
+        jvmTarget.set(
+            org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        )
+    }
+}
+
 kapt {
     correctErrorTypes = true
+
     arguments {
         arg("room.schemaLocation", "$projectDir/schemas")
     }
@@ -61,6 +69,7 @@ kapt {
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2026.09.00")
+
     implementation(composeBom)
     androidTestImplementation(composeBom)
 
@@ -76,6 +85,7 @@ dependencies {
     implementation("androidx.compose.animation:animation")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
 
     implementation("androidx.media3:media3-exoplayer:1.11.1")
@@ -92,8 +102,10 @@ dependencies {
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.3.0")
 
     testImplementation("junit:junit:4.13.2")
+
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 }
