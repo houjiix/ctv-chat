@@ -1,0 +1,44 @@
+CINEMA TV — BUILD / VALIDATION REPORT
+====================================
+
+Artifact
+--------
+Android Studio source project: CINEMA-TV-Android-Studio/
+Application ID: com.cinematv.app
+Min Android version: Android 8.0 (API 26)
+Target / compile SDK: 36
+
+Source-level checks completed
+------------------------------
+PASS  7 XML files parse successfully.
+PASS  English, French and Arabic string resources each contain the same 52 keys.
+PASS  All 50 app R.string references resolve to a declared string resource.
+PASS  Android manifest disables cleartext traffic.
+PASS  Declared permissions are limited to INTERNET and the MediaSession foreground-service permissions.
+PASS  gradlew shell script passes sh -n.
+PASS  Required Android Studio project files are present.
+PASS  Standalone Kotlin smoke test of LicensePolicy accepts the chosen public-domain/CC BY/CC BY-SA entries and rejects missing/restrictive/unknown licences.
+
+Not run / not verified in this environment
+------------------------------------------
+NOT RUN  Gradle sync, because Gradle is not installed and network access is unavailable.
+NOT RUN  Kotlin/Android compilation, because the Android SDK and AndroidX/Gradle dependency classpaths are unavailable.
+NOT RUN  JUnit, Android instrumentation tests, Android Lint, debug/release APK assembly or device/emulator playback tests.
+NOT CREATED  APK or AAB. No installable binary is included.
+NOT INCLUDED  Official gradle-wrapper.jar. The project includes custom Gradle 8.13 bootstrap scripts; these are not the official wrapper implementation.
+NOT AVAILABLE  Arena AI workspace Download Project UI/action. This ZIP is the available export from the current environment.
+
+Integration status
+------------------
+- TVmaze: public series metadata/search/episode listings are implemented; these are not playable media streams.
+- Internet Archive: conservative metadata licence filtering, MP4 discovery and network response checks are implemented. Uploader-supplied rights metadata is not independently verified and is not a legal guarantee.
+- TMDB: not connected; no credential or secured developer backend was supplied.
+- JustWatch/provider availability: not connected; no partner contract/token was supplied, so no provider offers or Tunisian availability are fabricated.
+- Favorites, local playback progress, settings, language resources and Media3 playback service are implemented in source but are not runtime-tested in this environment.
+- Dedicated Android TV 10-foot interface and focus-path testing remain unfinished; the current responsive Compose UI is registered for Leanback launch and provides focusable controls.
+
+Build environment limitation
+----------------------------
+This environment has Java 21, but no Android SDK, no installed Gradle, no cached Android Gradle Plugin/dependency artifacts, and no working network route to download them. The source project therefore could not be compiled or packaged into an APK here. The included gradlew / gradlew.bat bootstrap scripts use a local Gradle 8.13 installation if available, or attempt to download Gradle 8.13 when run on a connected build machine.
+
+This report intentionally distinguishes static source checks from a successful Android build. Do not treat this archive as a tested or installable release until Gradle compilation, lint, tests and device playback have been completed.
